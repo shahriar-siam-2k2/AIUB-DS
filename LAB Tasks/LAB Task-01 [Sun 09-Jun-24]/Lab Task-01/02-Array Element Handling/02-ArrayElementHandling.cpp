@@ -29,7 +29,7 @@ int main() {
     arr[0] = sum;
     arr[9] = sum;
 
-    cout << "Array values with overwritten with sum: ";
+    cout << "Array values overwritten with sum: ";
 
     for(int i=0 ; i<10 ; i++) {
         if(i < 9) {
