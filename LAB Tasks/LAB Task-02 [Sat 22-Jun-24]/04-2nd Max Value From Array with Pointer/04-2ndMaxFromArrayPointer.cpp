@@ -4,21 +4,27 @@
 using namespace std;
 
 int main() {
-    int n = 5, secMax, maxVal;
-    int arr[n] = {1, 5, 9, 4, 2};
+    int n = 5, secMax=0, maxVal=0;
+    int arr[n] = {0, 9, 9, 2, 5};
     int *a = arr;
 
-    maxVal = a[0];
-    secMax = maxVal;
+    if(a[0] > a[1]) {
+        maxVal = a[0];
+        secMax = a[1];
+    }
+    else {
+        maxVal = a[1];
+        secMax = a[0];
+    }
 
-    for(int test=0 ; test<1 ; test++) {
+    for(int test=0 ; test<2 ; test++) {
         for(int i=0 ; i<n ; i++) {
-            if(*a > secMax) {
-                maxVal = *a;
+            if(a[i] > maxVal && a[i] != secMax) {
+                maxVal = a[i];
             }
-            a++;
         }
         secMax = maxVal;
+        maxVal = 0;
     }
 
     cout << endl << "Second Highest Value: " << secMax << endl;
