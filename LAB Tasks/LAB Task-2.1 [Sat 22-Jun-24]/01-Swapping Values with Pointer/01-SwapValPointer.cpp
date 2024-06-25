@@ -1,4 +1,4 @@
-//DS-MID-LT-2-01: Write a program that swaps the values of two integers using pointers.
+//DS-MID-LT-2.1-01: Write a program that swaps the values of two integers using pointers.
 
 #include <iostream>
 using namespace std;

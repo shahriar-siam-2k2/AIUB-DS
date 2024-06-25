@@ -1,4 +1,4 @@
-//DS-MID-LT-2-03: Write a program that finds the highest value from an array using a pointer.
+//DS-MID-LT-2.1-03: Write a program that finds the highest value from an array using a pointer.
 
 #include <iostream>
 using namespace std;

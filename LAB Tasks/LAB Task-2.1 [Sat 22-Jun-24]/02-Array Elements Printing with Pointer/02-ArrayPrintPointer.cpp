@@ -1,4 +1,4 @@
-//DS-MID-LT-2-02: Write a program to print all elements of an array using a pointer to traverse the array.
+//DS-MID-LT-2.1-02: Write a program to print all elements of an array using a pointer to traverse the array.
 
 #include <iostream>
 using namespace std;
