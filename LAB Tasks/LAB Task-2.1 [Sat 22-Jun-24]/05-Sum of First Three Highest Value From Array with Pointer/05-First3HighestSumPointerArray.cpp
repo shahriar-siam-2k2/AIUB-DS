@@ -64,4 +64,5 @@ int main() {
     cout << endl << "Sum of the first three highest values: " << max1 + max2 + max3 << endl;
 
     delete maxVal, index1, index2, index3;
+    delete [] a;
 }
