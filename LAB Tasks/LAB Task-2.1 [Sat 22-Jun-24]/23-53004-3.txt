@@ -1,0 +1,315 @@
+//DS-MID-LT-2.1-01: Write a program that swaps the values of two integers using pointers.
+
+#include <iostream>
+using namespace std;
+
+void swapVal(int *c, int *d) {
+    int temp = *c;
+    *c = *d;
+    *d = temp;
+}
+
+int main() {
+    int a, b;
+
+    cout << endl << "Enter two integer numbers: ";
+    cin >> a >> b;
+
+    swapVal(&a, &b);
+
+    cout << endl << "Swapped Values: " << a << " " << b << endl;
+
+    return 0;
+}
+
+
+//DS-MID-LT-2.1-02: Write a program to print all elements of an array using a pointer to traverse the array.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n = 5;
+    int arr[n] = {1, 2, 3, 4, 5};
+    int *a = arr;
+
+    cout << endl << "Erray elements: ";
+
+    for(int i=0 ; i<n ; i++) {
+        cout << *a;
+
+        if(i == n-1) {
+            cout << "." << endl;
+        }
+        else {
+            cout << ", ";
+        }
+
+        a++;
+    }
+}
+
+
+//DS-MID-LT-2.1-03: Write a program that finds the highest value from an array using a pointer.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n = 5, maxVal;
+    int arr[n] = {1, 2, 9, 4, 5};
+    int *a = arr;
+
+    maxVal = a[0];
+
+    for(int i=0 ; i<n ; i++) {
+        if(*a > maxVal) {
+            maxVal = *a;
+        }
+        a++;
+    }
+
+    cout << endl << "Highest Value: " << maxVal << endl;
+}
+
+
+//DS-MID-LT-2.1-04: Write a program that finds the second highest value from an array using a pointer.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n = 5, max2;
+    int arr[n] = {0, 9, 9, 2, 5};
+    int *a = arr;
+    int *maxVal = new int;
+
+    if(a[0] > a[1]) {
+        *maxVal = a[0];
+        max2 = a[1];
+    }
+    else {
+        *maxVal = a[1];
+        max2 = a[0];
+    }
+
+    for(int test=0 ; test<2 ; test++) {
+        for(int i=0 ; i<n ; i++) {
+            if(a[i] > *maxVal && a[i] != max2) {
+                *maxVal = a[i];
+            }
+        }
+        max2 = *maxVal;
+        *maxVal = 0;
+    }
+
+    delete maxVal;
+
+    cout << endl << "Second Highest Value: " << max2 << endl;
+}
+
+
+//DS-MID-LT-2.1-05: Write a program that finds the sum of the first three highest values from an array using pointer.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, max1, max2, max3;
+    int *maxVal = new int;
+    int *index1 = new int;
+    int *index2 = new int;
+    int *index3 = new int;
+
+    cout << endl << "Enter array size (minimum 3): ";
+    cin >> n;
+
+    if(n < 3) {
+        cout << endl << "Array size should be greater than or equal 3 according to this program!" << endl;
+        return 0;
+    }
+
+    int arr[n];
+
+    cout << "Enter " << n << " integer numbers: ";
+    for(int i=0 ; i<n ; i++) {
+        cin >> arr[i];
+    }
+
+    int *a = arr;
+    *maxVal = 0;
+    *index1 = -1;
+    *index2 = -1;
+    *index3 = -1;
+
+    for(int test=0 ; test<3 ; test++) {
+        for(int i=0 ; i<n ; i++) {
+            if(a[i] > *maxVal && (i != *index1 && i != *index2 && i != *index3)) {
+                *maxVal = a[i];
+                
+                if(test == 0) {
+                    *index1 = i;
+                }
+                else if(test == 1) {
+                    *index2 = i;
+                }
+                else if(test == 2) {
+                    *index3 = i;
+                }  
+            }
+        }
+
+        if(test == 0) {
+            max1 = *maxVal;
+        }
+        else if(test == 1) {
+            max2 = *maxVal;
+        }
+        else if(test == 2) {
+            max3 = *maxVal;
+        }
+
+        *maxVal = 0;
+    }
+
+    cout << endl << "Sum of the first three highest values: " << max1 + max2 + max3 << endl;
+
+    delete maxVal, index1, index2, index3;
+    delete [] a;
+}
+
+
+//DS-MID-LT-2.1-06: Write a program where you can remove the value of the middle index of an array using pointer.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << endl << "Enter array size: ";
+    cin >> n;
+
+    int arr[n];
+
+    cout << "Enter " << n << " integer numbers: ";
+    for(int i=0 ; i<n ; i++) {
+        cin >> arr[i];
+    }
+
+    int *a = arr;
+    int *midIndex = new int;
+
+    *midIndex = n/2;
+
+    for(int i = *midIndex ; i<n-1 ; i++) {
+        a[i] = a[i+1];
+    }
+
+    n--;
+
+    cout << endl << "Array elements after deleting the value of middle index: ";
+    for(int i=0 ; i<n ; i++) {
+        cout << a[i];
+        if(i == n-1) {
+            cout << "." << endl;
+        }
+        else {
+            cout << ", ";
+        }
+    }
+
+    delete midIndex;
+    delete [] a;
+}
+
+
+//DS-MID-LT-2.1-07: Develop a program that will use a pointer to access all the elements of an array. Then use this pointer to swap the first two elements of the array and finally print the contents.
+
+#include <iostream>
+using namespace std;
+
+void arrSwap(int arr[]) {
+    int temp = arr[0];
+    arr[0] = arr[1];
+    arr[1] = temp;
+}
+
+int main() {
+    int n;
+    cout << endl << "Enter array size (minimum 2): ";
+    cin >> n;
+
+    if(n < 2) {
+        cout << endl << "Array size should be greater than or equal 2 according to this program!" << endl;
+        return 0;
+    }
+
+    int arr[n];
+
+    cout << "Enter " << n << " integer numbers: ";
+    for(int i=0 ; i<n ; i++) {
+        cin >> arr[i];
+    }
+
+    int *a = arr;
+
+    cout << endl << "Array Elements: ";
+    for(int i = 0 ; i < n ; i++) {
+        cout << a[i];
+        if(i == n-1) {
+            cout << "." << endl;
+        }
+        else {
+            cout << ", ";
+        }
+    }
+
+    arrSwap(a);
+
+    cout << endl << "Array Elements after swapping first two elements: ";
+    for(int i = 0 ; i < n ; i++) {
+        cout << a[i];
+        if(i == n-1) {
+            cout << "." << endl;
+        }
+        else {
+            cout << ", ";
+        }
+    }
+
+    delete [] a;
+}
+
+
+//DS-MID-LT-2.1-08: Write a program to print all elements of an array using a pointer to traverse the array.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << endl << "Enter array size: ";
+    cin >> n;
+
+    int arr[n];
+
+    cout << "Enter " << n << " integer numbers: ";
+    for(int i=0 ; i<n ; i++) {
+        cin >> arr[i];
+    }
+
+    int *a = arr;
+
+    cout << endl << "Array Elements: ";
+    for(int i = 0 ; i < n ; i++) {
+        cout << a[i];
+        if(i == n-1) {
+            cout << "." << endl;
+        }
+        else {
+            cout << ", ";
+        }
+    }
+
+    delete [] a;
+}

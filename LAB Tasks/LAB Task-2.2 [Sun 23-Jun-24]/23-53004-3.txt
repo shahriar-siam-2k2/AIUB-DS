@@ -1,0 +1,278 @@
+/*
+    DS-MID-LT-2.2-01: Develop a program to print the following structure-
+    + 
+    + +
+    + + +
+    + + + +
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << endl;
+
+    for(int line = 0 ; line < 4 ; line++) {
+        for(int i = 0 ; i < line+1 ; i++) {
+            cout << "+";
+            if(i < line) {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+
+//DS-MID-LT-2.2-02: Develop a program that will have a 3X4 2D array. Then find the sum of all the elements in each row and identify whether the sum is odd or even.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int row=3, col=4;
+    int *sum = new int;
+    int arr[row][col];
+
+    cout << endl << "Enter integer numbers in (" << row << "x" << col << ") size: " << endl;
+    for(int i=0 ; i<row ; i++) {
+        for(int j=0 ; j<col ; j++) {
+            cin >> arr[i][j];
+        }
+    }
+
+    *sum = 0;
+
+    for(int i=0 ; i<row ; i++){
+        for(int j=0 ; j<col ; j++) {
+            *sum = *sum + arr[i][j];
+        }
+        
+        cout << endl << "Sum of row-" << i+1 << ": " << *sum << endl;
+        if(*sum % 2 == 0) {
+            cout << "Sum of row-" << i+1 << " is an even number." << endl;
+        }
+        else {
+            cout << "Sum of row-" << i+1 << " is an odd number." << endl;
+        }
+
+        *sum = 0;
+    }
+
+    delete sum;
+}
+
+//DS-MID-LT-2.2-03: Develop a program that can take matrix input from a user and perform addition or subtraction.
+
+#include <iostream>
+using namespace std;
+
+void matAdd(int *arr1, int *arr2, int row, int col) {
+    cout << endl << "Addition Matrix: " << endl;
+    for(int i=0 ; i<row ; i++) {
+        for(int j=0 ; j<col ; j++) {
+            cout << *((arr1 + i * col) + j) + *((arr2 + i * col) + j);
+            if(j < col-1) {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+void matSub(int *arr1, int *arr2, int row, int col) {
+    cout << endl << "Subtraction Matrix: " << endl;
+    for(int i=0 ; i<row ; i++) {
+        for(int j=0 ; j<col ; j++) {
+            cout << *((arr1 + i * col) + j) - *((arr2 + i * col) + j);
+            if(j < col-1) {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int row, col;
+    int *op = new int;
+
+    cout << endl << "Enter Matrix size (rowXcol): ";
+    cin >> row >> col;
+
+    int mat1[row][col], mat2[row][col];
+
+    cout << endl << "Enter integer numbers in Matrix-1 (" << row << "x" << col << ") :" << endl;
+    for(int i=0 ; i<row ; i++) {
+        for(int j=0 ; j<col ; j++) {
+            cin >> mat1[i][j];
+        }
+    }
+
+    cout << endl << "Enter integer numbers in Matrix-2 (" << row << "x" << col << ") :" << endl;
+    for(int i=0 ; i<row ; i++) {
+        for(int j=0 ; j<col ; j++) {
+            cin >> mat2[i][j];
+        }
+    }
+
+    while(true) {
+        cout << endl << "1. Addition." << endl;
+        cout << "2. Substraction." << endl;
+        cout << "Choose your operation: ";
+        cin >> *op;
+
+        if(*op == 1) {
+            matAdd(*mat1, *mat2, row, col);
+            break;
+        }
+        else if(*op == 2) {
+            matSub(*mat1, *mat2, row, col);
+            break;
+        }
+        else {
+            cout << endl << "Wrong operation." << endl;
+        }
+    }
+
+    delete op;
+}
+
+
+//DS-MID-LT-2.2-04: Develop a program to show matrix multiplication. Keep it simple by using a 2X2 matrix.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int size = 2, mul;
+    int mat1[size][size], mat2[size][size];
+
+    cout << endl << "Enter integer numbers in Matrix-1 (" << size << "x" << size << ") :" << endl;
+    for(int i=0 ; i<size ; i++) {
+        for(int j=0 ; j<size ; j++) {
+            cin >> mat1[i][j];
+        }
+    }
+
+    cout << endl << "Enter integer numbers in Matrix-2 (" << size << "x" << size << ") :" << endl;
+    for(int i=0 ; i<size ; i++) {
+        for(int j=0 ; j<size ; j++) {
+            cin >> mat2[i][j];
+        }
+    }
+    
+    cout << endl << "Multiplication Matrix: " << endl;
+    for(int i=0 ; i<size ; i++) {
+        for(int j=0 ; j<size ; j++) {
+            mul = 0;
+            for(int k=0 ; k<size ; k++) {
+                mul = mul + (mat1[i][k] * mat2[k][j]);
+            }
+            cout << mul;
+            if(j < size-1) {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+
+/* 
+    DS-MID-LT-2.2-05: Develop a program using a 2D array to show the following-
+
+    1 0 1 0
+    0 1 0 1
+    1 0 1 0
+    0 1 0 1
+
+*/
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[4][4];
+    int *n = new int;
+
+    for(int i=0 ; i<4 ; i++){
+        if(i % 2 == 0) {
+            *n = 0;
+        }
+        else {
+            *n = 1;
+        }
+        for(int j=0 ; j<4 ; j++) {
+            if(*n % 2 == 0) {
+                *n = *n + 1;
+            }
+            else {
+                *n = *n - 1;
+            }
+            arr[i][j] = *n;
+        }
+    }
+
+    delete n;
+
+    cout << endl;
+    for(int i=0 ; i<4 ; i++) {
+        for(int j=0 ; j<4 ; j++) {
+            cout << arr[i][j];
+            if(j < 3) {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+}
+
+
+//DS-MID-LT-2.2-06: Develop a program where the contents that are multiple of 5 in a particular row of a 2D array will be swapped with the immediate next element below it.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int row, col;
+    int *temp = new int;
+
+    cout << endl << "Enter Array Size (Row X Col): ";
+    cin >> row >> col;
+
+    if(row < 2) {
+        cout << endl << "Row size should be greater than or equal 2 according to this program." << endl;
+        return 0;
+    }
+
+    int arr[row][col];
+    cout << endl << "Enter Array Elements:" << endl;
+    for(int i=0 ; i<row ; i++) {
+        for(int j=0 ; j<col ; j++) {
+            cin >> arr[i][j];
+        }
+    }
+
+    for(int i=0 ; i<row-1 ; i++) {
+        for(int j=0 ; j<col ; j++) {
+            if(arr[i][j] % 5 == 0) {
+                *temp = arr[i][j];
+                arr[i][j] = arr[i+1][j];
+                arr[i+1][j] = *temp;
+            }
+        }
+    }
+
+    delete temp;
+
+    cout << endl << "After Swapping:" << endl;
+    for(int i=0 ; i<row ; i++) {
+        for(int j=0 ; j<col ; j++) {
+            cout << arr[i][j];
+            if(j < col-1) {
+                cout << " ";
+            }
+        }
+        cout << endl;
+    }
+}
