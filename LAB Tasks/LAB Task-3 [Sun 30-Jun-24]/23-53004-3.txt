@@ -162,8 +162,34 @@ void BubbleSort(int arr[], int n) {
     while(swapped == true);
 }
 
+void BinarySearch(int arr[], int n, int item) {
+    bool flag = false;
+    int midIndex, left = 0, right = n;
+    
+    while(left <= right) {
+        midIndex = (left + right) / 2;
+        if(arr[midIndex] == item) {
+            flag = true;
+            break;
+        }
+        else if(arr[midIndex] < item) {
+            left = midIndex + 1;
+        }
+        else {
+            right = midIndex - 1;
+        }
+    }
+
+    if(flag == true) {
+        cout << "Item Found!" << endl;
+    }
+    else {
+        cout << "Item not found!" << endl;
+    }
+}
+
 int main() {
-    int size;
+    int size, item;
 
     cout << endl << "Enter array size: ";
     cin >> size;
@@ -177,9 +203,8 @@ int main() {
 
     BubbleSort(array, size);
 
-    cout << "Sorted array values: ";
-    for(int i=0 ; i<size ; i++) {
-        cout << array[i] << " ";
-    }
-    cout << endl;
+    cout << "Enter search value: ";
+    cin >> item;
+
+    BinarySearch(array, size, item);
 }
