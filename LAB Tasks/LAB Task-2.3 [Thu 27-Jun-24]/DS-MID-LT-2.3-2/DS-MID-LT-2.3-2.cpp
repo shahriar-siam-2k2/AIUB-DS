@@ -3,12 +3,12 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    struct bankUser {
-        string name, id, dob, accOpenDate, pass;
-        double balance;
-    };
+struct bankUser {
+    string name, id, dob, accOpenDate, pass;
+    double balance;
+};
 
+int main() {
     int n;
     double balance;
     string name, id, dob, accOpenDate, pass;
