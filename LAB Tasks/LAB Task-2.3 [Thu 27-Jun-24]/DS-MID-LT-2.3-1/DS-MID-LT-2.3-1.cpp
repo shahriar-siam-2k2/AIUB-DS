@@ -14,19 +14,19 @@ int main() {
     double balance;
 
     cout << endl << "Enter Name: ";
-    cin >> name;
+    getline(cin, name);
 
     cout << "Enter ID: ";
-    cin >> id;
+    getline(cin, id);
 
     cout << "Enter Date of Birth: ";
-    cin >> dob;
+    getline(cin, dob);
 
     cout << "Enter Account Opening Date: ";
-    cin >> accOpenDate;
+    getline(cin, accOpenDate);
 
     cout << "Enter Password: ";
-    cin >> pass;
+    getline(cin, pass);
 
     cout << "Enter Balance: ";
     cin >> balance;

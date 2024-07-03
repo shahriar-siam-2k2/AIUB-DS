@@ -29,9 +29,9 @@ int main() {
     user[2] = {"Erona", "9630", "04-Apr-24", "02-Jul-24", "ero", 4000};
 
     cout << endl << "Enter ID: ";
-    cin >> refID;
+    getline(cin, refID);
     cout << "Enter Password: ";
-    cin >> refPass;
+    getline(cin, refPass);
 
     if(login(refID, refPass) == true) {
         cout << endl << "Login Successfull!" << endl;  
