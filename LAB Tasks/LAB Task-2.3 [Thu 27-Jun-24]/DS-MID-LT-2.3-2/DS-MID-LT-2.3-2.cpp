@@ -19,6 +19,8 @@ int main() {
     bankUser user[n];
 
     for(int i=0 ; i<n ; i++) {
+        cin.ignore();
+        
         cout << endl << "Set User-" << i+1 <<  " Informations-";
 
         cout << endl << "Enter Name: ";

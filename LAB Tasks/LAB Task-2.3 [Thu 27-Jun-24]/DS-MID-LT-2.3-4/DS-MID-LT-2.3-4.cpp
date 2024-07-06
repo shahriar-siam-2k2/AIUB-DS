@@ -41,6 +41,8 @@ void create() {
     cout << endl << "\tCreate Account" << endl;
 
     while(true) {
+        cin.ignore();
+
         cout << endl << "Enter Name: ";
         getline(cin, name);
         cout << "Enter ID: ";
@@ -68,6 +70,8 @@ void create() {
 
 void deleteID() {
     string id, pass;
+
+    cin.ignore();
 
     cout << endl << "\tUser Delete" << endl;
 
