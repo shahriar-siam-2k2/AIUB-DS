@@ -5,7 +5,7 @@ const int stackSize = 5;
 int top = -1, stack[stackSize];
 
 bool isFull() {
-    if(top >= stackSize) {
+    if(top >= stackSize-1) {
         return true;
     }
     else {
