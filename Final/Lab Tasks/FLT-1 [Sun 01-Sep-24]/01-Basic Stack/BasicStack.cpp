@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-int top = -1, size = 5;
-int arr[5];
+const int stackSize = 5;
+int top = -1, stack[stackSize];
 
 bool isFull() {
-    if(top >= size) {
+    if(top >= stackSize) {
         return true;
     }
     else {
@@ -28,7 +28,7 @@ void Push(int a) {
     }
     else {
         top++;
-        arr[top] = a;
+        stack[top] = a;
         cout << endl << a << " has been pushed." << endl;
     }
 }
@@ -38,32 +38,49 @@ void Pop() {
         cout << endl << "Stack is empty!" << endl;
     }
     else {
-        cout << endl << arr[top] << " has been popped." << endl;
+        cout << endl << stack[top] << " has been popped." << endl;
         top--; 
     }
 }
 
-// void Show() {
-//     if(isEmpty()) {
-//         cout << endl << "Stack is empty!" << endl;
-//     }
-//     else {
-//         cout << endl << "Showing stack values:" << endl;
+void Show() {
+    if(isEmpty()) {
+        cout << endl << "Stack is empty!" << endl;
+    }
+    else {
+        cout << endl << "Showing stack values:" << endl;
 
-//         for(int i=0; i<size; i++) {
-//             cout << arr[i] << endl;
-//         } 
-//     }
-// }
+        for(int i=top; i>=0; i--) {
+            cout << stack[i] << endl;
+        } 
+    }
+}
+
+void TopElement() {
+    if(isEmpty()) {
+        cout << endl << "Stack is empty!" << endl;
+    }
+    else {
+        cout << endl << "Top Element: " << stack[top] << endl; 
+    }
+}
 
 int main() {
+    TopElement();
+    Show();
     Pop();
     Push(2);
+    TopElement();
     Push(5);
+    TopElement();
     Push(6);
+    Show();
+    Pop();
+    Show();
+    Pop();
+    Show();
     Pop();
     Pop();
     Pop();
-    Pop();
-    Pop();
+    Show();
 }
