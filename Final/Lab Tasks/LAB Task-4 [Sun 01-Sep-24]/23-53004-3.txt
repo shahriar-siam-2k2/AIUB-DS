@@ -1,0 +1,310 @@
+//DS-FINAL-LT-4-1: Write a program to implement stack.
+
+#include <iostream>
+using namespace std;
+
+const int stackSize = 5;
+int top = -1, stack[stackSize];
+
+bool isFull() {
+    if(top >= stackSize-1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool isEmpty() {
+    if(top == -1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void Push(int a) {
+    if(isFull()) {
+        cout << endl << "Stack Overflow!" << endl;
+    }
+    else {
+        top++;
+        stack[top] = a;
+        cout << endl << a << " has been pushed." << endl;
+    }
+}
+
+void Pop() {
+    if(isEmpty()) {
+        cout << endl << "Stack is empty!" << endl;
+    }
+    else {
+        cout << endl << stack[top] << " has been popped." << endl;
+        top--; 
+    }
+}
+
+void Show() {
+    if(isEmpty()) {
+        cout << endl << "Stack is empty!" << endl;
+    }
+    else {
+        cout << endl << "Showing stack values:" << endl;
+
+        for(int i=top; i>=0; i--) {
+            cout << stack[i] << endl;
+        } 
+    }
+}
+
+void TopElement() {
+    if(isEmpty()) {
+        cout << endl << "Stack is empty!" << endl;
+    }
+    else {
+        cout << endl << "Top Element: " << stack[top] << endl; 
+    }
+}
+
+int main() {
+    TopElement();
+    Show();
+    Pop();
+    Push(2);
+    TopElement();
+    Push(5);
+    TopElement();
+    Push(6);
+    Show();
+    Pop();
+    Show();
+    Pop();
+    Show();
+    Pop();
+    Pop();
+    Pop();
+    Show();
+}
+
+
+
+//DS-FINAL-LT-4-2: Write a program to implement queue.
+
+#include <iostream>
+using namespace std;
+
+const int stackSize = 5;
+int front = -1, rear = -1;
+int queue[stackSize];
+
+bool isEmpty() {
+    if(front == -1 && rear == -1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool isFull() {
+    if(rear == stackSize-1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void Enqueue(int a) {
+    if(isFull()) {
+        cout << endl << "Queue is full!" << endl;
+    }
+    else{
+        if(isEmpty()) {
+            front = 0;
+            rear = 0;
+        }
+        else {
+            rear = (rear+1) % stackSize;
+        }
+        queue[rear] = a;
+        cout << endl << a << " is enqueued." << endl;
+    }
+}
+
+void Dequeue() {
+    if(isEmpty()) {
+        cout << endl << "Queue is empty!" << endl;
+    }
+    else if(front == rear) {
+        front = -1;
+        rear = -1;
+    }
+    else {
+        front = (front+1) % stackSize;;
+    }
+}
+
+void FrontValue() {
+    if(isEmpty()) {
+        cout << endl << "Queue is empty!" << endl;
+    }
+    else {
+        cout << endl << "Front Value: " << queue[front] << endl;
+    }
+}
+
+void ShowQueue() {
+    if(isEmpty()) {
+        cout << endl << "Queue is empty!" << endl;
+    }
+    else {
+        cout << endl << "Showing Queue:" << endl;
+        for(int i=front; i<=rear; i++) {
+            cout << queue[i] << endl;
+        }
+    }
+}
+
+int main() {
+    Dequeue();
+
+    Enqueue(2);
+    Enqueue(3);
+    Enqueue(4);
+
+    FrontValue();
+
+    Enqueue(5);
+    Enqueue(6);
+
+    FrontValue();
+
+    ShowQueue();
+
+    Dequeue();
+    Dequeue();
+
+    Enqueue(25);
+
+    ShowQueue();
+
+    FrontValue();
+
+    Dequeue();
+    Dequeue();
+    Dequeue();
+    Dequeue();
+
+    FrontValue();
+
+    Enqueue(3);
+
+    FrontValue();
+
+    ShowQueue();
+
+    Dequeue();
+
+    ShowQueue();
+}
+
+
+
+//DS-FINAL-LT-4-3: Write a program for postfix evaluation.
+
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+const int stkSize = 100;
+int stack[stkSize], top = -1;
+
+bool isFull() {
+    if(top >= stkSize-1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool isEmpty() {
+    if(top == -1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void push(int opr) {
+    if(isFull()) {
+        cout << endl << "Stack Overflow!" << endl;
+    }
+    else {
+        stack[++top] = opr;
+    }
+}
+
+int pop() {
+    if(isEmpty()) {
+        cout << endl << "Stack Empty!" << endl;
+        return -1;
+    }
+    else {
+        return stack[top--];
+    }
+}
+
+int operation(char op, int opr1, int opr2) {
+    switch (op) {
+        case '+':
+            return opr1 + opr2;
+        case '-':
+            return opr1 - opr2;
+        case '*':
+            return opr1 * opr2;
+        case '/':
+            return opr1 / opr2;
+        case '^':
+            return pow(opr1, opr2);
+        default:
+            cout << endl << "Invalid Operator" << endl;
+            return -1;
+    }
+}
+
+int postfix(string ques) {
+    char op;
+    int opr1, opr2, result;
+    for(int i=0; i<ques.length(); i++) {
+        op = ques[i];
+
+        if(op >= '0' && op <= '9') {
+            push(op - '0');
+        }
+        else if(op == ' '|| op == '\t') {
+            continue;
+        }
+        else {
+            opr2 = pop();
+            opr1 = pop();
+            result = operation(op, opr1, opr2);
+            push(result);
+        }
+    }
+    return pop();
+}
+
+int main() {
+    string ques;
+
+    cout << endl << "Enter Question: ";
+    cin >> ques;
+
+    cout << endl << "Postfix Result: " << postfix(ques) << endl;
+
+    return 0;
+}
