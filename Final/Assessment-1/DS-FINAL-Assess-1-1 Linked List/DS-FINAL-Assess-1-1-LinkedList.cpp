@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 using namespace std;
 
 struct node {
@@ -18,19 +19,21 @@ void addHead(node* &head, int data) {
     node* newNode = createNode(data);
     newNode -> next = head;
     head = newNode;
-    cout << endl << "\t* Data Added!" << endl;
+    cout << endl << "\t* " << data << " Added!" << endl;
     return;
 }
 void addMid(node* &head, int data, int pos) {
-    if(head == nullptr) {
+    if(head == nullptr || pos == 0) {
         addHead(head, data);
     }
     else {
         node* newNode = createNode(data);
         node* temp = head;
 
-        for(int i=1; i< (pos && temp -> next != nullptr); i++) {
-            temp = temp -> next;
+        for(int i=1; i<pos; i++) {
+            if(temp != nullptr) {
+                temp = temp -> next;
+            }
         }
 
         if(temp == nullptr) {
@@ -38,10 +41,9 @@ void addMid(node* &head, int data, int pos) {
         }
         else {
             newNode -> next = temp -> next;
-            temp -> next = temp;
+            temp -> next = newNode;
+            cout << endl << "\t* " << data << " Added!" << endl;
         }
-
-        cout << endl << "\t* Data Added!" << endl;
     }
 }
 void addTail(node* &head, int data) {
@@ -58,7 +60,7 @@ void addTail(node* &head, int data) {
         temp -> next = newNode;
     }
 
-    cout << endl << "\t* Data Added!" << endl; 
+    cout << endl << "\t* " << data << " Added!" << endl; 
 }
 
 void traverseNodes(node* head) {
@@ -92,19 +94,27 @@ void deleteNode(node* &head, int data) {
         return;
     }
     else {
-        while(curr != nullptr) {
-            prev = curr;
-            if(curr -> data == data) {
-                prev -> next = curr -> next;
-                delete curr;
-                cout << endl << "\t* " << data << " deleted!" << endl;
-                return;
-            }
-            curr = curr -> next;
-        }
+        prev = curr;
+        curr = curr -> next;
     }
-    
-    cout << endl << "\t* Node not found!" << endl;
+
+    while(curr != nullptr) {
+        if(curr -> data == data) {
+            break;
+        }
+        prev = curr;
+        curr = curr -> next;
+    }
+
+    if(curr == nullptr) {
+        cout << endl << "\t* Node not found!" << endl;
+    }
+    else {
+        prev -> next = curr -> next;
+        delete curr;
+        cout << endl << "\t* " << data << " deleted!" << endl;
+        return;
+    }
 }
 
 int main() {
@@ -142,12 +152,18 @@ int main() {
                         break;
                     }
                     else if(*op == '2') {
-                        int* pos;
+                        int* pos = new int;
 
                         cout << "Enter Position: ";
                         cin >> *pos;
 
-                        addMid(head, *data, *pos);
+                        if(*pos >= 0) {
+                            addMid(head, *data, *pos);
+                        }
+                        else {
+                            cout << endl << "\t* Invalid position!" << endl;
+                        }
+
                         delete pos;
                         break;
                     }
@@ -184,6 +200,9 @@ int main() {
     delete data;
 
     cout << endl << "\t* Program returned!" << endl;
+    cout << endl << "\t* Press any key to close...";
+
+    getch();
 
     return 0;
 }
