@@ -1,6 +1,23 @@
+/*  
+    DS-FINAL-Assess-1-1:
+
+    Develop a singly link list that will be able to do the following operations-
+
+        a. Add at head, middle, and tail.
+
+        b. Traverse all the nodes
+
+        c. Delete a specific node
+
+    You must use functions to represent each operation
+
+*/
+
 #include <iostream>
 #include <conio.h>
 using namespace std;
+
+int posLimit = 0;
 
 struct node {
     int data;
@@ -9,17 +26,20 @@ struct node {
 
 node* createNode(int data) {
     node* newNode = new node;
-    newNode -> data = data;
-    newNode -> next = nullptr;
+    newNode->data = data;
+    newNode->next = nullptr;
     cout << endl << "\t* New Node Created!" << endl;
     return newNode;
 }
 
 void addHead(node* &head, int data) {
     node* newNode = createNode(data);
-    newNode -> next = head;
+    newNode->next = head;
     head = newNode;
+    posLimit++;
+
     cout << endl << "\t* " << data << " Added!" << endl;
+
     return;
 }
 void addMid(node* &head, int data, int pos) {
@@ -32,16 +52,18 @@ void addMid(node* &head, int data, int pos) {
 
         for(int i=1; i<pos; i++) {
             if(temp != nullptr) {
-                temp = temp -> next;
+                temp = temp->next;
             }
         }
 
         if(temp == nullptr) {
-            cout << endl << "\t* Invalid Position!" << endl;
+            cout << endl << "\t* An Error Occurred!" << endl;
         }
         else {
-            newNode -> next = temp -> next;
-            temp -> next = newNode;
+            newNode->next = temp->next;
+            temp->next = newNode;
+            posLimit++;
+
             cout << endl << "\t* " << data << " Added!" << endl;
         }
     }
@@ -54,13 +76,15 @@ void addTail(node* &head, int data) {
     }
     else {
         node* temp = head;
-        while(temp -> next != nullptr) {
-            temp = temp -> next;
+        while(temp->next != nullptr) {
+            temp = temp->next;
         }
-        temp -> next = newNode;
+        temp->next = newNode;
     }
 
-    cout << endl << "\t* " << data << " Added!" << endl; 
+    posLimit++;
+
+    cout << endl << "\t* " << data << " Added!" << endl;
 }
 
 void traverseNodes(node* head) {
@@ -72,8 +96,8 @@ void traverseNodes(node* head) {
 
         cout << endl << "Traversing All Nodes: " << endl;
         while(temp != nullptr) {
-            cout << temp -> data << endl;
-            temp = temp -> next;
+            cout << temp->data << endl;
+            temp = temp->next;
         }
     }
 }
@@ -87,32 +111,37 @@ void deleteNode(node* &head, int data) {
     node* curr = head;
     node* prev = head;
 
-    if(head -> data == data) {
-        head = curr -> next;
+    if(head->data == data) {
+        head = curr->next;
         delete curr;
-        cout << endl << "\t* " << data << " deleted!" << endl;
+        posLimit--;
+
+        cout << endl << "\t* Node containing " << data << " is deleted!" << endl;
+
         return;
     }
     else {
         prev = curr;
-        curr = curr -> next;
+        curr = curr->next;
     }
 
     while(curr != nullptr) {
-        if(curr -> data == data) {
+        if(curr->data == data) {
             break;
         }
         prev = curr;
-        curr = curr -> next;
+        curr = curr->next;
     }
 
     if(curr == nullptr) {
-        cout << endl << "\t* Node not found!" << endl;
+        cout << endl << "\t* Node containing " << data << " is not found!" << endl;
     }
     else {
-        prev -> next = curr -> next;
+        prev->next = curr->next;
         delete curr;
-        cout << endl << "\t* " << data << " deleted!" << endl;
+        posLimit--;
+
+        cout << endl << "\t* Node containing " << data << " is deleted!" << endl;
         return;
     }
 }
@@ -154,10 +183,10 @@ int main() {
                     else if(*op == '2') {
                         int* pos = new int;
 
-                        cout << "Enter Position: ";
+                        cout << "Enter Position (0 to " << posLimit << "): ";
                         cin >> *pos;
 
-                        if(*pos >= 0) {
+                        if(*pos >= 0 && *pos <= posLimit) {
                             addMid(head, *data, *pos);
                         }
                         else {
