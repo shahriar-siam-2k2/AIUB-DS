@@ -1,8 +1,11 @@
-//DS-FINAL-LT-5-1: Write a program to create a BST with 10 nodes.
+//DS-FINAL-LT-5-2: Write a program to add a node to the BST in question no.1.
 
 #include <iostream>
 #include <conio.h>
 using namespace std;
+
+bool check = false;
+int count = 0;
 
 struct node {
     int data;
@@ -15,6 +18,7 @@ node* createNode(int data) {
     newNode->data = data;
     newNode->Lchild = nullptr;
     newNode->Rchild = nullptr;
+    check = true;
 
     cout << endl << "\t* New node with data " << data << " created!" << endl;
 
@@ -41,20 +45,42 @@ node* createBST(node* &root, int data) {
 }
 
 int main() {
+    int* data = new int;
+    char* op = new char;
     node* root = nullptr;
 
-    createBST(root, 1);
-    createBST(root, 2);
-    createBST(root, 3);
-    createBST(root, 3);
-    createBST(root, 4);
-    createBST(root, 5);
-    createBST(root, 6);
-    createBST(root, 7);
-    createBST(root, 8);
-    createBST(root, 9);
-    createBST(root, 10);
-    
+    while(true) {
+        cout << endl << endl << "\tBinary Search Tree" << endl;
+
+        cout << endl << "1. Add Data" << endl
+                    << "2. Exit" << endl;
+        cout << "Choose operation: ";
+        cin >> *op;
+
+        if(*op == '1') {
+            cout << endl << "Enter data-" << (count+1) << ": ";
+            cin >> *data;
+
+            createBST(root, *data);
+
+            if(check == true) {
+                count++;
+            }
+
+            check = false;
+        }
+        else if(*op == '2') {
+            break;
+        }
+        else {
+            cout << endl << "\t* Invalid operation!" << endl;
+        }
+    }
+
+    delete data;
+    delete op;
+
+    cout << endl << "\t* Program returned!" << endl;
     cout << endl << "Press any key to exit...";
 
     getch();
