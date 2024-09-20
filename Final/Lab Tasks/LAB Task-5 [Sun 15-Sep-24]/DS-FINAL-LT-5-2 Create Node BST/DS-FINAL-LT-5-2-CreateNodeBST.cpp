@@ -5,7 +5,7 @@
 using namespace std;
 
 bool check = false;
-int count = 0;
+int c = 0;
 
 struct node {
     int data;
@@ -58,13 +58,13 @@ int main() {
         cin >> *op;
 
         if(*op == '1') {
-            cout << endl << "Enter data-" << (count+1) << ": ";
+            cout << endl << "Enter data-" << (c+1) << ": ";
             cin >> *data;
 
             createBST(root, *data);
 
             if(check == true) {
-                count++;
+                c++;
             }
 
             check = false;
