@@ -4,7 +4,6 @@
 #include <conio.h>
 using namespace std;
 
-bool check = false;
 int c = 0;
 
 struct node {
@@ -18,9 +17,11 @@ node* createNode(int data) {
     newNode->data = data;
     newNode->Lchild = nullptr;
     newNode->Rchild = nullptr;
-    check = true;
 
-    cout << endl << "\t* New node with data " << data << " created!" << endl;
+    c++;
+
+    cout << endl << "\t* New Node (node-" << c << ") Created!" << endl;
+    cout << endl << "\t* " << data << " Added to Node-" << c << "!" << endl;
 
     return newNode;
 }
@@ -83,14 +84,7 @@ int main() {
         if(*op == '1') {
             cout << endl << "Enter data-" << (c+1) << ": ";
             cin >> *data;
-
             createBST(root, *data);
-
-            if(check == true) {
-                c++;
-            }
-
-            check = false;
         }
         else if(*op == '2') {
             if(root != nullptr) {
