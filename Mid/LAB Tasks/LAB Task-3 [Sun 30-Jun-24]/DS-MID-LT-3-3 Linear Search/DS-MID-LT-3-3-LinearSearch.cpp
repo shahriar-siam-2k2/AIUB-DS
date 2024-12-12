@@ -5,7 +5,7 @@ using namespace std;
 
 void LinearSearch(int arr[], int n, int item) {
     bool flag = false;
-    int index;
+    int index = -1;
     for(int i=0 ; i<n ; i++) {
         if(arr[i] == item) {
             flag = true;
@@ -14,7 +14,7 @@ void LinearSearch(int arr[], int n, int item) {
         }
     }
 
-    if(flag == true) {
+    if(index != -1) {
         cout << item << " Found at index " << index << endl;
     }
     else {
